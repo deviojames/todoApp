@@ -21,7 +21,9 @@ let repository = new Realm({
 
 let TodoService = {
   findAll: function(sortBy) {
-    if (!sortBy) sortBy = [['completed', true], ['updatedAt', false]];
+    if (!sortBy) {
+      sortBy = [['completed', true], ['updatedAt', false]];
+    }
     console.log( 'repo '+ JSON.stringify(repository.objects('Todo')));
     
     return repository.objects('Todo');
@@ -47,6 +49,8 @@ let TodoService = {
     if (!callback) return;
     repository.write(() => {
       repository.delete(todo);
+      alert('DELETED')
+      this.props.updateDataList(dataList);
     });
     
   }

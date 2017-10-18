@@ -7,12 +7,11 @@ class ListViewItem extends Component {
   constructor(props) {
     super(props);
     this._onCheckBoxPressed = this._onCheckBoxPressed.bind(this);
-    this.onClearCompleted = this.onClearCompleted.bind(this);
+    this.onDelTodo = this.onDelTodo.bind(this);
     this.state = {
       data: this.props.data
     }
   }
-
   componentWillReceiveProps(props) {
     this.setState({
       data: props.data
@@ -35,10 +34,11 @@ class ListViewItem extends Component {
     this.props.onCompletedChange();
     
   }
-  onClearCompleted(){
+  onDelTodo(){
     var data = this.state.data;
+    var dataList = this.props.data;
     TodoService.remove(data, () => {
-      data.completed = !data.completed;
+      
     });
   };
 
@@ -61,7 +61,7 @@ class ListViewItem extends Component {
             iconStyle={{marginLeft: -10, marginRight: 0}}
             activeOpacity={1}
             borderRadius={5}
-            onPress={this.onClearCompleted}
+            onPress={this.onDelTodo}
           >
           </Icon.Button>
         </View>
