@@ -8,5 +8,5 @@ run
 - Remove completed todo
 - Checklist
 
-This app using [Realm.js](https://realm.io)
+This app using [Realm](https://realm.io)
 
