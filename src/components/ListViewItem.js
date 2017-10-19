@@ -36,9 +36,9 @@ class ListViewItem extends Component {
   }
   onDelTodo(){
     var data = this.state.data;
-    var dataList = this.props.data;
+    var dataList = TodoService.findAll();
     TodoService.remove(data, () => {
-      
+      this.props.updateDataList(dataList);
     });
   };
 

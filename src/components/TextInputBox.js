@@ -26,7 +26,6 @@ class TextInputBox extends Component {
     this.setState({
       newValue: title
     });
-    //this.props.updateDataList(dataList);
   }
 
   onKeyPress(event){
@@ -38,22 +37,12 @@ class TextInputBox extends Component {
       var dataList = this.props.data;
 
       dataList.unshift(newDataItem);
-      /*var dataItem = Utils.findTodo(newDataItem, dataList);
-      if(dataItem) {
-        Utils.move(dataList, (dataList.indexOf(dataItem)), 0);
-
-        this.setState({
-          newValue: ''
-        });
-        this.props.updateDataList(dataList);
-        return;
-      }*/
-   
       TodoService.save(newDataItem);
 
       this.setState({
         newValue: ''
       });
+     // dataList = TodoService.findAll();
       this.props.updateDataList(dataList);
     }
   }
@@ -76,7 +65,6 @@ class TextInputBox extends Component {
             value={this.state.newValue}
             title="Add a todo"
           />
-
       </View>
     );
   }

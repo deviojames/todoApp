@@ -12,7 +12,6 @@ let dataList = TodoService.findAll();
 var dataListOrder = getOrder(dataList);
 
 function getOrder(list) {
-  console.log('getOrder '+Object.keys(list))
   return Object.keys(list);
 }
 
@@ -52,7 +51,7 @@ class ListView extends Component {
           data={this.state.dataList}
           order={dataListOrder}
           onRowMoved={e => moveOrderItem(this, e.from, e.to)}
-          renderRow={(dataItem, section, index) => <ListViewItem data={dataItem} onCompletedChange={this._onCompletedChange}/>}
+          renderRow={(dataItem, section, index) => <ListViewItem data={dataItem} onCompletedChange={this._onCompletedChange} updateDataList={this.updateDataList}/>}
         />
       );
     }
