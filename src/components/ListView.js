@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight} from 'react-native';
+import { Text, View, TouchableHighlight,Button} from 'react-native';
 import TodoModel from './TodoModel';
 import TextInputBox from './TextInputBox';
 import SortableListView from 'react-native-sortable-listview';
 import ListViewItem from './ListViewItem';
 import Utils from './Utils';
 import TodoService from './TodoService';
-
+import ClearButton from './ClearButton';
 
 let dataList = TodoService.findAll();
 var dataListOrder = getOrder(dataList);
@@ -40,7 +40,7 @@ class ListView extends Component {
   _onCompletedChange() {
     if (this.forceUpdate) this.forceUpdate();
   }
-
+  
   render() {
     let listView = (<View></View>);
     if (this.state.dataList.length) {
@@ -61,7 +61,12 @@ class ListView extends Component {
           <TextInputBox
             data={Array.from(dataList)}
             updateDataList={this.updateDataList}/>
+
           {listView}
+
+          <ClearButton 
+            data={Array.from(dataList)} 
+            updateDataList={this.updateDataList}/>
         </View>
     )
   }

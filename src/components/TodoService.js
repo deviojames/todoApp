@@ -24,6 +24,8 @@ let TodoService = {
     if (!sortBy) {
       sortBy = [['completed', true], ['updatedAt', false]];
     }
+    console.log( 'repo '+ JSON.stringify(repository.objects('Todo')));
+    
     return repository.objects('Todo');
   },
 
@@ -33,6 +35,7 @@ let TodoService = {
     repository.write(() => {
       todo.updatedAt = new Date();
       repository.create('Todo', todo);
+      console.log( 'repo '+ JSON.stringify(repository.objects('Todo')));
     })
   },
 
@@ -43,13 +46,22 @@ let TodoService = {
       todo.updatedAt = new Date();
     });
   },
+  clearCompleted: function(callback) {
+    if (!callback) return;
+    repository.write(() => {
+      let allCompleted = repository.objects('Todo').filtered('completed == true');
+      repository.delete(allCompleted);
+      callback();
+    });
+  },
   remove: function(todo,callback) {
     if (!callback) return;
     repository.write(() => {
       repository.delete(todo);
       callback();
-  });
-    
+  }
+);
+  
   }
 };
 /*
