@@ -3,7 +3,7 @@ import TodoModel from './TodoModel';
 
 import RNBackbone from 'react-native-backbone';
 import realmStorage from 'react-native-backbone/src/storages/realm';
-
+/*
 let repository = new Realm({
     schema: [{
 	name: 'Todo',
@@ -70,4 +70,65 @@ TodoService.save(new TodoModel('Make a Todo App with React Native'));
 TodoService.save(new TodoModel('Check to complete a todo'));
 TodoService.save(new TodoModel('Save data with Realm'));*/
 
+RNBackbone.storage = realmStorage;
+
+var Todo = RNBackbone.Model.extend({
+  realmSchema:{
+    name: 'todo',
+    primaryKey: 'id',
+    properties: {
+        id: {type: 'string', indexed: true},
+        title: 'string',
+        completed: 'bool',
+        createdAt: 'date',
+        updatedAt: 'date'
+    }
+  }
+});
+
+var Todos = RNBackbone.Collection.extend({
+  model: Todo
+});
+
+realmStorage.init({
+  models: [Todo]
+});
+
+let TodoService = {
+  findAll: function(sortBy) {
+    if (!sortBy) {
+        sortBy = [['completed', true], ['updatedAt', false]];
+    }
+    var todos = this.todos = new Todos();
+    todos.fetch({
+        success: () => {
+            //console.log(todos)
+        }
+    })
+    return 
+  },
+  save: function(todo) {
+    var todo = new Todo({
+      title: todo.title,
+      completed: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
+    todo.save(null, {
+      success: () =>{
+        console.log(todo)
+      }
+    })
+  },
+  update: function(todo){
+    
+  },
+  clearCompleted: function(){
+
+  },
+  remove: function(todo){
+    
+  }
+
+}
 module.exports = TodoService;
