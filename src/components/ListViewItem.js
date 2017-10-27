@@ -35,7 +35,7 @@ class ListViewItem extends Component {
     
   }
   onDelTodo(){
-    var data = this.state.data;
+    var data = this.state.data.attributes;
     var dataList = TodoService.findAll();
     TodoService.remove(data, () => {
       this.props.updateDataList(dataList);
@@ -44,6 +44,7 @@ class ListViewItem extends Component {
 
   render() {
     let data = this.state.data;
+   // data = JSON.stringify(data)
     let color = data.completed ? '#C5C8C9' : '#000';
     let textDecorationLine = data.completed ? 'line-through' : 'none';
     return (
@@ -65,7 +66,6 @@ class ListViewItem extends Component {
           >
           </Icon.Button>
         </View>
-    
     )
   }
 }

@@ -21,7 +21,7 @@ class TextInputBox extends Component {
 
   onChange(event){
     var title = event.nativeEvent.text;
-    var dataList = this.props.data.filter((item) => item.title.match(new RegExp('.*' + title +'.*', 'gi')));
+    //var dataList = this.props.data.filter((item) => item.title.match(new RegExp('.*' + title +'.*', 'gi')));
 
     this.setState({
       newValue: title

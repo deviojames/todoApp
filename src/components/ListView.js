@@ -9,10 +9,13 @@ import TodoService from './TodoService';
 import ClearButton from './ClearButton';
 
 let dataList = TodoService.findAll();
-var dataListOrder = getOrder(dataList);
+//var dataListOrder = getOrder(dataList);
 
 function getOrder(list) {
+  console.log("getOrder"+JSON.stringify(list))
+ // console.log(list)
   return Object.keys(list);
+
 }
 
 function moveOrderItem(listView, fromIndex, toIndex) {
@@ -31,7 +34,7 @@ class ListView extends Component {
   }
 
   updateDataList(dataList) {
-    dataListOrder = getOrder(dataList);
+
     this.setState({
       dataList: dataList
     });
@@ -49,9 +52,9 @@ class ListView extends Component {
           ref='listView'
           style={{flex: 1}}
           data={this.state.dataList}
-          order={dataListOrder}
+          //order={dataListOrder}
           onRowMoved={e => moveOrderItem(this, e.from, e.to)}
-          renderRow={(dataItem, section, index) => <ListViewItem data={dataItem} onCompletedChange={this._onCompletedChange} updateDataList={this.updateDataList}/>}
+          renderRow={(dataItem, section, index) => <ListViewItem data={dataItem.attributes} onCompletedChange={this._onCompletedChange} updateDataList={this.updateDataList}/>}
         />
       );
     }

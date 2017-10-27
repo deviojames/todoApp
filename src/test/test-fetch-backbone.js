@@ -39,15 +39,15 @@ class FetchStorageExample extends Component {
     render() {
         if (this.state.isLoading) {
             return (
-                <View>
+               // <View>
                     <Text>Fetching from API, please wait...</Text>
-                </View>
+                //</View>
             )
         } else {
             return (
-                <View>
+                //<View>
                     <Text>Test {this.business.length} </Text>
-                </View>
+               // </View>
             )
         }
     }
